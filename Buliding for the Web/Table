@@ -1,0 +1,26 @@
+<?php
+// Create a MySQLi object to connect to the database
+$mysqli = new mysqli("localhost", "username", "password", "rentmycar.sql");
+
+// Check for connection errors
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
+// Run a query to select all users
+$sql = "SELECT * FROM users";
+$result = $mysqli->query($sql);
+
+// Check for query errors
+if (!$result) {
+    die("Query failed: " . $mysqli->error);
+}
+
+// Display the usernames of all users
+while ($row = $result->fetch_assoc()) {
+    echo $row["username"] . "<br>";
+}
+
+// Close the database connection
+$mysqli->close();
+?>
